@@ -1,6 +1,0 @@
-Name: Janice Smith
-Age: 31
-
-Janice is a casual runner. She goes on runs regularly at the weekends to keep in shape and has been doing so for about a month now. Having noticed improvment in her fitness, she has decided to use an app to track her progress and see her improvement in more detail. She wants to see a record of her times to help descide if she should take on more strenuous runs or not.
-
-In addition, Janice would like to compare her results to those of her friends to check how their fitness compares and motivate them (or her) to exercise more.
