@@ -1,0 +1,25 @@
+average times (per route?)
+personal best times
+distance ran
+time per segment
+display whether going up/down hill
+trends on time taken for roots
+social aspects (sharing times with others?)
+adding personal goals/track goal acomplishment
+
+
+personas:
+	beginning runners
+
+		Made new years resolution to excercise more
+		not interested in complex interfaces, wants everything to be simple and easy
+
+		Bob made a new years resolution to loose weight and has decided to do so by taking up jogging. To help monitor his performance he bought a wearable tracker and he 
+		would like to be able to get some basic feel-good stats, such as average distance run per day. Bob is not generally a tech fan and wants the interface to be as 		simple as possible.
+
+
+
+
+	marathon trainees
+	casuals
+	
