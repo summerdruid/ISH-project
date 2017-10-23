@@ -1,0 +1,16 @@
+Bobs user profile.
+
+Bob made a new years resolution to loose weight and has decided to do so by taking up jogging. To help monitor his performance he bought a wearable tracker and he would like to be able to get some basic feel-good stats, such as average distance run per day. Bob is not generally a tech fan and wants the interface to be as simple as possible.
+
+
+
+
+
+Scenario:
+
+Looking at average times/ checking goal achievement.
+
+
+Bob is thinking about possible routes to take when out for his run. He opens up the GPX viewer in edit mode to see a map of the area and plots out several possible routes. Once satisfied he saves them.
+
+Bob is considering going for a weekend run and wants to decide on a route, so he opens up the GPX viewer and looks through his saved routes. He picks a route and heads out.
