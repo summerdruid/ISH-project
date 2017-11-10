@@ -1,13 +1,17 @@
 <!DOCTYPE html>
+
+{% load staticfiles%}
+
 <html>
 <head>
-<link rel="stylesheet" href="http://127.0.0.1:8000/static/css/example.css" type="text/css">
+<link rel="stylesheet" href="{% static "css/example.css" %}" type="text/css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script async defer src="http://127.0.0.1:8000/static/js/map.js"></script>
+<script async defer src="{% static "js/map.js" %}"></script>
 
-<script src="http://127.0.0.1:8000/static/js/example.js"></script>
+<script src="{% static "js/example.js" %}"></script>
+
 </head>
 <body>
 
