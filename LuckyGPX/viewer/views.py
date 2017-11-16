@@ -43,7 +43,7 @@ def register(request):
 
     # Render appropriate template
     return render(request,
-            'viewer/register_test.html',
+            'viewer/register.html',
             {'user_form': user_form, 'registered': registered}) 
 
 
