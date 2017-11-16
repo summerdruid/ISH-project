@@ -10,13 +10,22 @@
 
   <body>
     <nav class="navbar navbar-default navbar-dark bg-dark navbar-fixed-top">
-      <a class="navbar-brand" href="#">LuckyGPX</a>
-      <a href="/viewer/newindex">
-        <button type="button" class="btn btn-link">Home Test</button>
-      </a>
-      <a href="/viewer/test/">
-        <button type="button" class="btn btn-link" value="Input Button">Link test</button>
-      </a>
+      <a class="navbar-brand" href="/viewer/newindex/">LuckyGPX</a>
+      <div class="navbar-left">
+        <a href="/viewer/createRoute"><button type="button" class="btn btn-link">Create Route</button></a>
+        <a href="/viewer/loadRoute"><button type="button" class="btn btn-link">Load Route</button></a>
+        <a href="/viewer/viewRoute"><button type="button" class="btn btn-link">View Routes</button></a>
+        <a href="/viewer/viewGraphs/"><button type="button" class="btn btn-link">View Graphs</button></a>
+      </div>
+      <div class="navbar-right">
+        {% if user.is_authenticated %}
+          <a href="/viewer/editaccount/"><button type="button" class="btn btn-link">View Account</button></a>
+          <button type="button" class="btn btn-link">Logout</button>
+        {% else %}
+          <a href="/viewer/login/"><button type="button" class="btn btn-link">Login</button></a>
+          <a href="/viewer/register/"><button type="button" class="btn btn-link">Register</button></a>
+        {% endif %}
+      </div>
     </nav>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
