@@ -74,3 +74,39 @@ def test(request):
     context_dict = {'boldmessage':  "Bolf font message!"}
 
     return render(request, 'viewer/test.html', context_dict)
+
+def account(request):
+	context_dict = {}
+	
+	return render(request, 'viewer/account.html, context_dict)
+	
+def editAcount(request):
+	context_dict = {}
+	
+	return render(request, 'viewer/editAcount.html, context_dict)
+	
+def createRoute(request):
+	context_dict = {}
+	
+	return render(request, 'viewer/createRoute.html, context_dict)
+	
+def loadRoute(request):
+	context_dict = {}
+	
+	return render(request, 'viewer/loadRoute.html, context_dict)
+	
+def routeHistory(request):
+	context_dict = {}
+	
+	return render(request, 'viewer/routeHistory.html, context_dict)
+	
+def viewGraphs(request):
+	context_dict = {}
+	
+	return render(request, 'viewer/viewGraphs.html, context_dict)
+	
+def viewRoute(request):
+	context_dict = {}
+	
+	return render(request, 'viewer/viewRoute.html, context_dict)
+	
