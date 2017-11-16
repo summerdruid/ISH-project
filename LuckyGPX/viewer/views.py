@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from viewer.forms import UserForm
 import xml.etree.ElementTree as ET
 
@@ -12,7 +14,7 @@ def index(request):
 
     return render(request, 'viewer/index.html', context_dict)
 
-def login(request):
+def user_login(request):
 
 	if request.method =='POST':
 		username = request.POST.get('username')
@@ -22,7 +24,7 @@ def login(request):
 		if user:
 			if user.is_active:
 				login(request, user)
-				return HttpResponseRedirect(reverse('index'))
+				return HttpResponseRedirect('/viewer/')
 			else:
 				return HttpResponse("Your LuckyGPX account is disabled.")
 		else:
@@ -30,6 +32,12 @@ def login(request):
 			return HttpResponse("Invalid login details supplied.")
 	else:
 		return render(request, 'viewer/login.html', {})
+
+@login_required
+def user_logout(request):
+    logout(request)
+
+    return HttpResponseRedirect('/viewer/')
 
 def register(request):
 
