@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LuckyGPX</title>
+    </head>
+
+    <body>
+        <h1>Register</h1>
+
+        {% if registered %}
+        Thanks for registering!
+        <a href="/viewer/">Home</a><br />
+        {% else %}
+        Register now
+
+        <form id="user_form" method="post" action="/viewer/register/"
+                enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <-- Display the form-->
+            {{ user_form.as_p }}
+
+            <input type="submit" name="submit" value="Register" />
+        </form>
+        {% endif %}
+    </body>
+</html>
