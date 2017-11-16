@@ -1,0 +1,23 @@
+{
+  "name": "ISH-project",
+  "version": "1.0.0",
+  "description": "For the ISH team project to create an interface to view GPX files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/summerdruid/ISH-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/summerdruid/ISH-project/issues"
+  },
+  "homepage": "https://github.com/summerdruid/ISH-project#readme",
+  "dependencies": {
+    "chart.js": "^2.7.1"
+  }
+}

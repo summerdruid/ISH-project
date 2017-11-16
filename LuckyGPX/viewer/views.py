@@ -11,7 +11,6 @@ def index(request):
     return render(request, 'viewer/index.html', context_dict)
 
 
-
 def register(request):
 
     # Boolean, False = user not registered, True = User registered
@@ -47,3 +46,8 @@ def register(request):
             'viewer/register_test.html',
             {'user_form': user_form, 'registered': registered}) 
 
+
+def newindex(request):
+    context_dict = {}
+
+    return render(request, 'viewer/newindex.html', context_dict)
