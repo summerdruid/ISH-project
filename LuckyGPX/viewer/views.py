@@ -18,7 +18,7 @@ def register(request):
 
     # If we're receiving data, try to process it.
     if request.method == 'POST':
-        # try to get data from the request 
+        # try to get data from the request
         user_form = UserForm(data=request.POST)
 
         # If the data was valid
@@ -35,7 +35,7 @@ def register(request):
 
         # Something went wrong, complain (to the user a well)
         else:
-            print user_form.errors
+            print(user_form.errors)
 
     # we're not receiving data, so send them a form to fill in
     else:
@@ -44,7 +44,7 @@ def register(request):
     # Render appropriate template
     return render(request,
             'viewer/register_test.html',
-            {'user_form': user_form, 'registered': registered}) 
+            {'user_form': user_form, 'registered': registered})
 
 
 def newindex(request):
