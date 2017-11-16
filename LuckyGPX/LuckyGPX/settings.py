@@ -121,4 +121,6 @@ USE_TZ = True
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+LOGIN_URL = '/viewer/login/'
+
 STATICFILES_DIRS = (STATIC_PATH,)

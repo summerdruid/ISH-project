@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+import xml.etree.ElementTree as ET
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -25,3 +26,35 @@ class Run(models.Model):
     route = models.ForeignKey(Route)
     points = models.ManyToManyField(Point)
     startTime = models.DateField()
+
+
+def addRunFromGPX(data, route):
+    pdata = parseGPX(data)
+
+    run = Run()
+    run.route = route
+    
+    for point in pdata:
+        newPoint = Point()
+        newPoint.latitude = point['lat']
+        newPoint.longitude = point['lon']
+
+
+# takes gpx data as a string, returns list of dictionaries with
+# lat and long of each point on the first track of the gpx data.
+def parseGPX(data):
+    gpxstring = data
+
+    namespace = {'gpx': 'http://www.topografix.com/GPX/1/1'}
+    root = ET.fromstring(gpxstring)
+    track = root.findall(".//gpx:trk", namespace)
+    trkseg  = root.find(".//gpx:trkseg", namespace)
+    points = trkseg.findall(".gpx:trkpt", namespace)
+    parsed_data = []
+    for point in points:
+        lat = float(point.attrib['lat'])
+        lon = float(point.attrib['lon'])
+        parsed_data.append({'lat': lat, 'lon': lon})
+
+    return parsed_data
+

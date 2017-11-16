@@ -4,15 +4,18 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from viewer.forms import UserForm
-import xml.etree.ElementTree as ET
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 def index(request):
     context_dict = {}
 
     return render(request, 'viewer/index.html', context_dict)
 
-def login(request):
+
+# called user_login to avoid shadowing imported login function
+def user_login(request):
 
 	if request.method =='POST':
 		username = request.POST.get('username')
@@ -30,6 +33,19 @@ def login(request):
 			return HttpResponse("Invalid login details supplied.")
 	else:
 		return render(request, 'viewer/login.html', {})
+
+
+# log out the user, checking that they are logged in
+@login_required
+def user_logout(request):
+    logout(request)
+    
+    # send the user home
+    return HttpResponseRedirect('/viewer')
+
+@login_required
+def restricted(request):
+    return HttpResponse("You must log in to see this page.")
 
 def register(request):
 
@@ -112,22 +128,3 @@ def viewRoute(request):
 	context_dict = {}
 
 	return render(request, 'viewer/viewRoute.html', context_dict)
-
-
-# takes gpx data as a string, returns list of dictionaries with
-# lat and long of each point on the first track of the gpx data.
-def parseGPX(data):
-    gpxstring = data
-
-    namespace = {'gpx': 'http://www.topografix.com/GPX/1/1'}
-    root = ET.fromstring(gpxstring)
-    track = root.findall(".//gpx:trk", namespace)
-    trkseg  = root.find(".//gpx:trkseg", namespace)
-    points = trkseg.findall(".gpx:trkpt", namespace)
-    parsed_data = []
-    for point in points:
-        lat = float(point.attrib['lat'])
-        lon = float(point.attrib['lon'])
-        parsed_data.append({'lat': lat, 'lon': lon})
-
-    return parsed_data
