@@ -15,4 +15,3 @@ urlpatterns = [url(r'^$', views.index, name='index'),
 			  url(r'^viewGraphs/$', views.viewGraphs, name='viewGraphs'),		# url needs changing for graphs of different routes, was unsure what it should be
 			  url(r'^viewRoute/$', views.viewRoute, name='viewRoute'),		# url needs changing for viewing different routes, was unsure what it should be
 			  ]
-
