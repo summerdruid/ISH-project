@@ -8,3 +8,8 @@ def index(request):
     context_dict = {}
 
     return render(request, 'viewer/index.html', context_dict)
+
+def newindex(request):
+    context_dict = {}
+
+    return render(request, 'viewer/newindex.html', context_dict)
