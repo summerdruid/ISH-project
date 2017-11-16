@@ -1,0 +1,31 @@
+{% extends 'viewer/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Register
+{% endblock %}
+
+{% block body_block %}
+<div align="center">
+<h1>Register for LuckyGPX</h1>
+	{% if registered %}
+		<strong>Thank you for registering!</strong><br>
+		<a href="{% url 'index' %}">Return to the homepage</a><br>or<br>
+		<a href="{% url 'login' %}">click here to login.</a><br />
+	{% else %}
+		<strong>Register here!</strong><br />
+		<form id="user_form" method="post" action="{% url 'register' %}"
+			enctype="multipart/form-data">
+
+		{% csrf_token %}
+
+		<!-- Display each form -->
+		{{ user_form.as_p }}
+		{{ profile_form.as_p }}
+
+		<!-- Provide a button to click to submit the form. -->
+		<input type="submit" name="submit" value="Register" />
+	</form>
+	{% endif %}
+</div>
+{% endblock %}
