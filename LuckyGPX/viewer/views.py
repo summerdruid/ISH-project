@@ -16,7 +16,7 @@ def login(request):
 		username = request.POST.get('username')
 		password = request.POST.get('password')
 		user = authenticate(username=username, password=password)
-		
+
 		if user:
 			if user.is_active:
 				login(request, user)
@@ -28,7 +28,7 @@ def login(request):
 			return HttpResponse("Invalid login details supplied.")
 	else:
 		return render(request, 'viewer/login.html', {})
-	
+
 def register(request):
 
     # Boolean, False = user not registered, True = User registered
@@ -62,7 +62,7 @@ def register(request):
     # Render appropriate template
     return render(request,
             'viewer/register.html',
-            {'user_form': user_form, 'registered': registered}) 
+            {'user_form': user_form, 'registered': registered})
 
 
 def newindex(request):
@@ -77,36 +77,35 @@ def test(request):
 
 def account(request):
 	context_dict = {}
-	
-	return render(request, 'viewer/account.html, context_dict)
-	
-def editAcount(request):
+
+	return render(request, 'viewer/account.html', context_dict)
+
+def editAccount(request):
 	context_dict = {}
-	
-	return render(request, 'viewer/editAcount.html, context_dict)
-	
+
+	return render(request, 'viewer/editAccount.html', context_dict)
+
 def createRoute(request):
 	context_dict = {}
-	
-	return render(request, 'viewer/createRoute.html, context_dict)
-	
+
+	return render(request, 'viewer/createRoute.html', context_dict)
+
 def loadRoute(request):
 	context_dict = {}
-	
-	return render(request, 'viewer/loadRoute.html, context_dict)
-	
+
+	return render(request, 'viewer/loadRoute.html', context_dict)
+
 def routeHistory(request):
 	context_dict = {}
-	
-	return render(request, 'viewer/routeHistory.html, context_dict)
-	
+
+	return render(request, 'viewer/routeHistory.html', context_dict)
+
 def viewGraphs(request):
 	context_dict = {}
-	
-	return render(request, 'viewer/viewGraphs.html, context_dict)
-	
+
+	return render(request, 'viewer/viewGraphs.html', context_dict)
+
 def viewRoute(request):
 	context_dict = {}
-	
-	return render(request, 'viewer/viewRoute.html, context_dict)
-	
+
+	return render(request, 'viewer/viewRoute.html', context_dict)
