@@ -13,3 +13,8 @@ def newindex(request):
     context_dict = {}
 
     return render(request, 'viewer/newindex.html', context_dict)
+
+def test(request):
+    context_dict = {'boldmessage':  "Bolf font message!"}
+
+    return render(request, 'viewer/test.html', context_dict)
