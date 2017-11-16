@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from viewer.forms import UserForm
 import xml.etree.ElementTree as ET
 
@@ -12,6 +12,24 @@ def index(request):
 
     return render(request, 'viewer/index.html', context_dict)
 
+def login(request):
+
+	if request.method =='POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		user = authenticate(username=username, password=password)
+
+		if user:
+			if user.is_active:
+				login(request, user)
+				return HttpResponseRedirect(reverse('index'))
+			else:
+				return HttpResponse("Your LuckyGPX account is disabled.")
+		else:
+			print("Invalid login details: {0}, {1}".format(username, password))
+			return HttpResponse("Invalid login details supplied.")
+	else:
+		return render(request, 'viewer/login.html', {})
 
 def register(request):
 
@@ -20,7 +38,7 @@ def register(request):
 
     # If we're receiving data, try to process it.
     if request.method == 'POST':
-        # try to get data from the request 
+        # try to get data from the request
         user_form = UserForm(data=request.POST)
 
         # If the data was valid
@@ -37,7 +55,7 @@ def register(request):
 
         # Something went wrong, complain (to the user a well)
         else:
-            print user_form.errors
+            print(user_form.errors)
 
     # we're not receiving data, so send them a form to fill in
     else:
@@ -46,7 +64,7 @@ def register(request):
     # Render appropriate template
     return render(request,
             'viewer/register.html',
-            {'user_form': user_form, 'registered': registered}) 
+            {'user_form': user_form, 'registered': registered})
 
 
 def newindex(request):
@@ -58,6 +76,42 @@ def test(request):
     context_dict = {'boldmessage':  "Bolf font message!"}
 
     return render(request, 'viewer/test.html', context_dict)
+
+
+def account(request):
+	context_dict = {}
+
+	return render(request, 'viewer/account.html', context_dict)
+
+def editAccount(request):
+	context_dict = {}
+
+	return render(request, 'viewer/editAccount.html', context_dict)
+
+def createRoute(request):
+	context_dict = {}
+
+	return render(request, 'viewer/createRoute.html', context_dict)
+
+def loadRoute(request):
+	context_dict = {}
+
+	return render(request, 'viewer/loadRoute.html', context_dict)
+
+def routeHistory(request):
+	context_dict = {}
+
+	return render(request, 'viewer/routeHistory.html', context_dict)
+
+def viewGraphs(request):
+	context_dict = {}
+
+	return render(request, 'viewer/viewGraphs.html', context_dict)
+
+def viewRoute(request):
+	context_dict = {}
+
+	return render(request, 'viewer/viewRoute.html', context_dict)
 
 
 # takes gpx data as a string, returns list of dictionaries with
@@ -77,5 +131,3 @@ def parseGPX(data):
         parsed_data.append({'lat': lat, 'lon': lon})
 
     return parsed_data
-        
-
