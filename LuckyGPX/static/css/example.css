@@ -13,14 +13,13 @@
 html, body {
   height: 100%;
   margin: 0;
-  padding-top: 50;
 }
 
 .fill {
   top: 55px;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 30px;
   position: absolute;
   width: auto;
   height: auto;
