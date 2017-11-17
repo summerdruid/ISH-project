@@ -25,7 +25,7 @@ class Point(models.Model):
 class Run(models.Model):
     route = models.ForeignKey(Route)
     points = models.ManyToManyField(Point)
-    startTime = models.DateField()
+    startTime = models.DateField(auto_now_add=True) #temp hack!!!
 
 
 def addRunFromGPX(data, route):
@@ -33,12 +33,18 @@ def addRunFromGPX(data, route):
 
     run = Run()
     run.route = route
-    
-    for point in pdata:
-        newPoint = Point()
-        newPoint.latitude = point['lat']
-        newPoint.longitude = point['lon']
+    run.save()
 
+    new_points = []
+    for point in pdata:
+        new_point = Point()
+        new_point.latitude = point['lat']
+        new_point.longitude = point['lon']
+        new_points.append(new_point)
+        new_point.save()
+
+    run.points.add(*new_points)
+    run.save()
 
 # takes gpx data as a string, returns list of dictionaries with
 # lat and long of each point on the first track of the gpx data.
