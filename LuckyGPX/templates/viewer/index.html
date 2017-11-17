@@ -8,7 +8,10 @@
 
   <script src="{% static "js/example.js" %}"></script>
 
-  <input type="file" accept="text/xml" ID="uploader">Select track file</input>
+  <form id="gpx_form" method="post" action="/viewer/index/" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" accept="text/xml" ID="uploader">Select track file</input>
+  </form>
   <br>
   <div id="map"/>
 {% endblock %}
