@@ -5,23 +5,31 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from viewer.forms import UserForm
+from viewer.forms import UserForm, UploadFileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from viewer.models import *
 
 def index(request):
     context_dict = {}
 
-    print("Does this work?")
-    print(MEDIA_URL)
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            handle_uploaded_file(request.FILES['file'])
-            return HttpResponseRedirect('/success/url/')
+            print(request.FILES['file'])
+            data = u"".encode('utf-8')
+            for l in request.FILES['file']:
+                data += l
+            route = Route.objects.all()[0]
+            addRunFromGPX(data,route)
+            run = Run.objects.all()[0]
+            points = Point.objects.filter()
+            print(run)
+            return HttpResponseRedirect('/viewer/')
     else:
         form = UploadFileForm()
+        context_dict["upload_form"] = form
 
     return render(request, 'viewer/index.html', context_dict)
 

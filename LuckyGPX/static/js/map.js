@@ -13,7 +13,8 @@ function initMap() {
 window.eqfeed_callback = function(results) {
         points = [];
         bounds = new google.maps.LatLngBounds();
-	results.find("trkpt").each(function() {
+
+        results.find("trkpt").each(function() {
                 var lat = $(this).attr("lat");
                 var lon = $(this).attr("lon");
                 var p = new google.maps.LatLng(lat, lon);

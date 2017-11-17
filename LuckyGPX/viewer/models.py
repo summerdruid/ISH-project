@@ -18,14 +18,16 @@ class Route(models.Model):
     def __unicode__(self):
         return self.name
 
+class Run(models.Model):
+    route = models.ForeignKey(Route)
+    startTime = models.DateField(auto_now_add=True) #temp hack!!!
+
+
+
 class Point(models.Model):
     longitude = models.IntegerField
     latitude = models.IntegerField
-
-class Run(models.Model):
-    route = models.ForeignKey(Route)
-    points = models.ManyToManyField(Point)
-    startTime = models.DateField(auto_now_add=True) #temp hack!!!
+    run = models.ForeignKey(Run)
 
 
 def addRunFromGPX(data, route):
@@ -35,15 +37,13 @@ def addRunFromGPX(data, route):
     run.route = route
     run.save()
 
-    new_points = []
     for point in pdata:
         new_point = Point()
         new_point.latitude = point['lat']
         new_point.longitude = point['lon']
-        new_points.append(new_point)
+        new_point.run = run
         new_point.save()
 
-    run.points.add(*new_points)
     run.save()
 
 # takes gpx data as a string, returns list of dictionaries with

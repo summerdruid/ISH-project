@@ -10,8 +10,9 @@
 
   <form id="gpx_form" method="post" action="/viewer/" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="file" accept="text/xml" ID="uploader">Select track file</input>
-    <input type="submit" name="submit" value="index" />
+    {{ upload_form.as_p }}
+   <!-- <input type="file" accept="text/xml" ID="uploader">Select track file</input> -->
+    <input type="submit" name="submit" value="Submit" ID="uploader"/>
   </form>
   <br>
   <div id="map"/>
