@@ -17,13 +17,14 @@ def index(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            print(request.FILES['file'])
+            # Get file as string
             data = u"".encode('utf-8')
             for l in request.FILES['file']:
                 data += l
-            route = Route.objects.all()[0]
-            addRunFromGPX(data,route)
-            run = Run.objects.all()[0]
+            # Create run from file for selected route
+            route = Route.objects.get(name=form.cleaned_data['route'])
+            run = addRunFromGPX(data,route)
+            # plot the uploaded run on the map
             points = Point.objects.filter(run=run).order_by("id")
             seq = []
             for point in points:
@@ -32,7 +33,15 @@ def index(request):
             context_dict["run_loaded"] = True
             return render(request, 'viewer/index.html', context_dict)
     else:
+        # create form for uploading GPX file, setting
+        # route selection based on DB contents
         form = UploadFileForm()
+        routes = Route.objects.all()
+        route_names = []
+        for r in routes:
+            route_names.append((r.name, r.name))
+        form.fields["route"].choices = route_names
+        form.base_fields["route"].choices = route_names
         context_dict["upload_form"] = form
 
     return render(request, 'viewer/index.html', context_dict)

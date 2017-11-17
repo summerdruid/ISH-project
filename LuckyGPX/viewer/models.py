@@ -48,6 +48,8 @@ def addRunFromGPX(data, route):
 
     run.save()
 
+    return run
+
 # takes gpx data as a string, returns list of dictionaries with
 # lat and long of each point on the first track of the gpx data.
 def parseGPX(data):

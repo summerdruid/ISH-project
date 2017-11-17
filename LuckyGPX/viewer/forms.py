@@ -10,4 +10,5 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'password')
 
 class UploadFileForm(forms.Form):
+    route = forms.ChoiceField(choices=(), required=True)
     file = forms.FileField()
