@@ -13,6 +13,10 @@ from django.urls import reverse
 def index(request):
     context_dict = {}
 
+    print("Does this work?")
+    if request.method == 'POST':
+        print("hello")
+
     return render(request, 'viewer/index.html', context_dict)
 
 
