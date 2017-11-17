@@ -14,8 +14,14 @@ def index(request):
     context_dict = {}
 
     print("Does this work?")
+    print(MEDIA_URL)
     if request.method == 'POST':
-        print("hello")
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect('/success/url/')
+    else:
+        form = UploadFileForm()
 
     return render(request, 'viewer/index.html', context_dict)
 
@@ -45,7 +51,7 @@ def user_login(request):
 @login_required
 def user_logout(request):
     logout(request)
-    
+
     # send the user home
     return HttpResponseRedirect('/viewer')
 
