@@ -5,22 +5,23 @@ function initMap() {
                  center: new google.maps.LatLng(2.8,-187.3),
                  mapTypeId: 'terrain'
         });
-
+        eqfeed_callback(run)
 }
 
 // Loop through the results array and place a marker for each
 // set of coordinates.
 window.eqfeed_callback = function(results) {
+        if(results.length == 0) return;
         points = [];
         bounds = new google.maps.LatLngBounds();
 
-        results.find("trkpt").each(function() {
-                var lat = $(this).attr("lat");
-                var lon = $(this).attr("lon");
-                var p = new google.maps.LatLng(lat, lon);
-                points.push(p);
-                bounds.extend(p);
-                })
+        for(i = 0; i< results.length; i++) {
+            var lat = results[i]['lat'];
+            var lon = results[i]['lon'];
+            var p = new google.maps.LatLng(lat, lon);
+            points.push(p);
+            bounds.extend(p);
+        }
 
         var poly = new google.maps.Polyline({
             path: points,

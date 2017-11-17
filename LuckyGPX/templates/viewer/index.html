@@ -15,5 +15,13 @@
     <input type="submit" name="submit" value="Submit" ID="uploader"/>
   </form>
   <br>
+<!-- Script here takes data from context_dict and puts it in variable for javascript -->
+  <script>
+  {% if run_loaded %}
+  var run = {{ run_points | safe }};
+  {% else %}
+  var run = []
+  {% endif %}
+  </script>
   <div id="map"/>
 {% endblock %}

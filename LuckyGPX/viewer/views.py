@@ -12,7 +12,7 @@ from django.urls import reverse
 from viewer.models import *
 
 def index(request):
-    context_dict = {}
+    context_dict = {"run_loaded": False}
 
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
@@ -27,8 +27,9 @@ def index(request):
             points = Point.objects.filter(run=run).order_by("id")
             seq = []
             for point in points:
-                seq.append({"lat" : point.latitude, "lon" : point.longitude})
+                seq.append({"lat".encode('utf-8') : point.latitude, "lon".encode('utf-8') : point.longitude})
             context_dict["run_points"] = seq
+            context_dict["run_loaded"] = True
             return render(request, 'viewer/index.html', context_dict)
     else:
         form = UploadFileForm()
