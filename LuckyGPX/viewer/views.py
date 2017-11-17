@@ -24,9 +24,12 @@ def index(request):
             route = Route.objects.all()[0]
             addRunFromGPX(data,route)
             run = Run.objects.all()[0]
-            points = Point.objects.filter()
-            print(run)
-            return HttpResponseRedirect('/viewer/')
+            points = Point.objects.filter(run=run).order_by("id")
+            seq = []
+            for point in points:
+                seq.append({"lat" : point.latitude, "lon" : point.longitude})
+            context_dict["run_points"] = seq
+            return render(request, 'viewer/index.html', context_dict)
     else:
         form = UploadFileForm()
         context_dict["upload_form"] = form

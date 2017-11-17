@@ -25,10 +25,9 @@ class Run(models.Model):
 
 
 class Point(models.Model):
-    longitude = models.IntegerField
-    latitude = models.IntegerField
+    longitude = models.FloatField()
+    latitude = models.FloatField()
     run = models.ForeignKey(Run)
-
 
 def addRunFromGPX(data, route):
     pdata = parseGPX(data)
@@ -37,11 +36,14 @@ def addRunFromGPX(data, route):
     run.route = route
     run.save()
 
+    index = 0
     for point in pdata:
         new_point = Point()
         new_point.latitude = point['lat']
         new_point.longitude = point['lon']
         new_point.run = run
+        new_point.index = index
+        index += 1
         new_point.save()
 
     run.save()
